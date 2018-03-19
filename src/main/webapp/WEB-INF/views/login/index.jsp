@@ -12,7 +12,12 @@
     <title>${mess}</title>
 </head>
 <body>
-${user[aa]}aa
-${user.aa}
+<form action="/user/create" method="post">
+    姓名：<input type="text" name="username">
+    密码：<input type="text" name="password">
+    账号：<input type="text" name="usercode">
+    组织：<input type="text" name="orgid">
+    <input type="submit" value="提交">
+</form>
 </body>
 </html>

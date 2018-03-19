@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sgdp.sys.user.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.sgdp.sys.user.model.User">
+    <id column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="usercode" jdbcType="VARCHAR" property="usercode" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="orgid" jdbcType="VARCHAR" property="orgid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, username, usercode, password, orgid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where userid = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sgdp.sys.user.model.User">
+    insert into sys_user (userid, username, usercode, 
+      password, orgid)
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{orgid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sgdp.sys.user.model.User">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="usercode != null">
+        usercode,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="orgid != null">
+        orgid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null">
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null">
+        #{orgid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sgdp.sys.user.model.User">
+    update sys_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="usercode != null">
+        usercode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null">
+        orgid = #{orgid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sgdp.sys.user.model.User">
+    update sys_user
+    set username = #{username,jdbcType=VARCHAR},
+      usercode = #{usercode,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      orgid = #{orgid,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

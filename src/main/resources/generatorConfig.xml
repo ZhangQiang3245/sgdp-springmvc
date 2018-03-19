@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+   <!-- <properties resource="config.properties"/>-->
+    <!-- 指定数据连接驱动jar地址 绝对路径或者类路径-->
+    <classPathEntry  location="D:\Maven\repository\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar"/>
+    <context id="DB2Tables"  targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳-->
+
+            <property name="suppressAllComments" value="true"/>  <!-- 是否取消注释 -->
+        </commentGenerator>
+       
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/sgdp" userId="root" password="root">
+        </jdbcConnection>
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类的包名和位置，这里配置将生成的实体类放在这个包下 -->
+        <javaModelGenerator targetPackage="com.sgdp.sys.user.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>  
+            <property name="trimStrings" value="true"/>  
+        </javaModelGenerator>
+        <!-- 生成的SQL映射文件包名和位置，这里配置将生成的SQL映射文件放在这个包下 -->
+        <sqlMapGenerator targetPackage="com.sgdp.sys.user.mapping" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>  
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置，这里配置将生成的dao类放在这个包下 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sgdp.sys.user.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>  
+        </javaClientGenerator>  
+       
+        <table tableName="sys_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <!--JAVA数据类型都是有符号的， 当使用无符号类型时这就会导致缺失精度。可以使用 <columnOverride> 解决MySql无符号数值类型的字段-->
+            <!--<columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG" />-->
+        </table>
+    </context>  
+</generatorConfiguration>  
