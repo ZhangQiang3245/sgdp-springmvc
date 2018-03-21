@@ -19,5 +19,14 @@
     组织：<input type="text" name="orgid">
     <input type="submit" value="提交">
 </form>
+<form action="/user/update" method="post">
+    id：<input type="text" name="userid">
+    姓名：<input type="text" name="username">
+    密码：<input type="text" name="password">
+    账号：<input type="text" name="usercode">
+    组织：<input type="text" name="orgid">
+    <input type="submit" value="提交">
+</form>
+
 </body>
 </html>

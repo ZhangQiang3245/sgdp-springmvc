@@ -15,43 +15,42 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>4.3.7.RELEASE</version>
+            <version>${springmvc.version}</version>
         </dependency>
         <!-- spring核心包end -->
 
@@ -61,7 +60,6 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.13</version>
         </dependency>
-
 
 
         <!--jstl-->
@@ -75,6 +73,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
         <!--mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -87,26 +86,42 @@
             <version>1.3.1</version>
         </dependency>
 
-
-<!--mysql-->
+        <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.37</version>
         </dependency>
-<!--junit-->
+
+        <!--junit-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
+        <!--druid-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.9</version>
         </dependency>
+
+
+        <!--解决错误：nested exception is java.lang.IllegalArgumentException: No converter found for return value of type: class java.util.ArrayList
+        这是因为springmvc默认是没有对象转换成json的转换器的，需要手动添加jackson依赖。-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+
     </dependencies>
     <!-- <build>
        <plugins>
@@ -142,6 +157,8 @@
 
     <properties>
         <dao.target.dir>src/main/java</dao.target.dir>
+        <jackson.version>2.5.4</jackson.version>
+        <springmvc.version>4.3.7.RELEASE</springmvc.version>
     </properties>
 
 </project>

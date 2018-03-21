@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2018-03-20 00:10:54
+Date: 2018-03-22 00:08:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,6 +45,7 @@ CREATE TABLE `sys_resource` (
   `resourcesymbol` varchar(100) DEFAULT NULL,
   `remark` varchar(200) DEFAULT NULL,
   `parentresourceid` varchar(36) DEFAULT NULL,
+  `resourceicon` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`resourceid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,8 +99,10 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('458e11de-a127-4f54-8c13-f3098628cbc5', '???', '???', '???', '??');
-INSERT INTO `sys_user` VALUES ('b552af7e-70ed-4c77-ae50-feb8fe1ce991', '士大夫', '士大夫', '士大夫', '手段');
+INSERT INTO `sys_user` VALUES ('146af582-0331-4e89-aaf1-e0387261a53d', 'admin', 'admin', 'admin', 'admin');
+INSERT INTO `sys_user` VALUES ('31e25a59-cc31-43bd-8d52-dee9e1d31425', 'ls', 'ls', '1234', 'ls');
+INSERT INTO `sys_user` VALUES ('96218cd9-a3aa-4b6d-adef-d3fbd294c485', 'zhangqiang', 'zq', '1234', 'za');
+INSERT INTO `sys_user` VALUES ('b552af7e-70ed-4c77-ae50-feb8fe1ce991', 'sdfsdfsd', 'sdfsdfsd', 'fsdfsdf', 'fsdfsdf');
 
 -- ----------------------------
 -- Table structure for sys_user_role
