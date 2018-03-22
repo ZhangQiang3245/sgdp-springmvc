@@ -24,20 +24,20 @@
         </javaTypeResolver>
 
         <!-- 生成实体类的包名和位置，这里配置将生成的实体类放在这个包下 -->
-        <javaModelGenerator targetPackage="com.sgdp.sys.user.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.sgdp.sys.resource.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>  
             <property name="trimStrings" value="true"/>  
         </javaModelGenerator>
         <!-- 生成的SQL映射文件包名和位置，这里配置将生成的SQL映射文件放在这个包下 -->
-        <sqlMapGenerator targetPackage="com.sgdp.sys.user.mapping" targetProject="src/main/java">
+        <sqlMapGenerator targetPackage="com.sgdp.sys.resource.mapping" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>  
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置，这里配置将生成的dao类放在这个包下 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sgdp.sys.user.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.sgdp.sys.resource.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>  
        
-        <table tableName="sys_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sys_resource" domainObjectName="Resource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <!--JAVA数据类型都是有符号的， 当使用无符号类型时这就会导致缺失精度。可以使用 <columnOverride> 解决MySql无符号数值类型的字段-->
             <!--<columnOverride column="UNSIGNED_BIGINT_FIELD" javaType="java.lang.Object" jdbcType="LONG" />-->
         </table>

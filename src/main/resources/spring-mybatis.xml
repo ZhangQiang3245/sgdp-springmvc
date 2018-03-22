@@ -111,7 +111,7 @@
     <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
         <property name="patterns">
             <list>
-                <value>com.sgdp.sys.user.service.*</value>
+                <value>com.sgdp.sys.*.service.*</value>
             </list>
         </property>
     </bean>
