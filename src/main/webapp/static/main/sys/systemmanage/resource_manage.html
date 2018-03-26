@@ -23,7 +23,7 @@
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-      <div class="ibox float-e-margins">
+    <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>资源维护</h5>
             <div class="ibox-tools">
@@ -47,13 +47,12 @@
         <div class="ibox-content">
             <div class="row row-lg">
                 <div class="col-sm-12">
-                    <!-- Example Toolbar -->
-                    <div class="example-wrap">
-                        <div class="example">
-                            <table id="exampleTableToolbar" data-mobile-responsive="true"></table>
-                        </div>
+                    <div id="toolbar" class="btn-sm">
+                        <button id="add">新增</button>
+                        <button id="del">删除</button>
+                        <button id="edit">修改</button>
                     </div>
-                    <!-- End Example Toolbar -->
+                    <table id="resourceTable" data-mobile-responsive="true"></table>
                 </div>
             </div>
         </div>
@@ -66,6 +65,7 @@
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../js/plugins/layer/layer.js"></script>
 <script src="./js/resource_manage.js"></script>
 </body>
 
