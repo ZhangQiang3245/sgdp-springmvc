@@ -2,8 +2,12 @@ package com.sgdp.sys.resource.dao;
 
 import com.sgdp.sys.resource.model.Resource;
 
+import java.util.List;
+
 public interface ResourceMapper {
     int deleteByPrimaryKey(String resourceid);
+
+    int batchDelete(List<String> resourceids);
 
     int insert(Resource record);
 
@@ -14,4 +18,7 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+
+    List <Resource> selectAll();
+
 }

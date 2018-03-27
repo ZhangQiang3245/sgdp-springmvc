@@ -22,9 +22,21 @@
     from sys_resource
     where resourceid = #{resourceid,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_resource
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_resource
     where resourceid = #{resourceid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="batchDelete" parameterType="java.lang.String">
+    delete from sys_resource
+    where resourceid in
+    <foreach item="resourceids" collection="list" open="(" separator="," close=")">
+      #{resourceids}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.sgdp.sys.resource.model.Resource">
     insert into sys_resource (resourceid, resourcename, resourcecode, 

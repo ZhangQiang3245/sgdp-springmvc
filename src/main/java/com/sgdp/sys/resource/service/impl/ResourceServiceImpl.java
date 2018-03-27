@@ -6,6 +6,8 @@ import com.sgdp.sys.resource.service.IResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by ZQ on 2018/3/22.
  */
@@ -18,6 +20,10 @@ public class ResourceServiceImpl implements IResourceService {
         return resourceMapper.deleteByPrimaryKey(resourceid);
     }
 
+    public int batchDelete(List<String> resourceids) {
+        return resourceMapper.batchDelete(resourceids);
+    }
+
     public int insert(Resource record) {
         return resourceMapper.insert(record);
     }
@@ -28,6 +34,10 @@ public class ResourceServiceImpl implements IResourceService {
 
     public Resource selectByPrimaryKey(String resourceid) {
         return resourceMapper.selectByPrimaryKey(resourceid);
+    }
+
+    public List <Resource> selectAll() {
+        return resourceMapper.selectAll();
     }
 
     public int updateByPrimaryKeySelective(Resource record) {

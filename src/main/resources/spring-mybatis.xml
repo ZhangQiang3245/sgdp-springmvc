@@ -5,6 +5,8 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
     <!-- JNDI方式配置数据源 -->
     <!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> <property name="jndiName" value="${jndiName}"></property> </bean> -->
     <!-- ========================================配置数据源========================================= -->
@@ -42,9 +44,36 @@
         <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="true" />
         <!-- 监控数据库 -->
-        <!-- <property name="filters" value="stat" /> -->
-        <property name="filters" value="mergeStat" />
+        <!-- ******重要的配置：监控统计拦截的filters,日志记录 *start* ******-->
+        <!-- 并在filters属性中配置了log4j，ref中的bean是下面拦截器的配置 -->
+        <!-- proxyFilters和filters是组合关系,前者是根据bean配置,后者根据别名配置的-->
+        <!-- stat是statfilter的别名,log4j是logFilter的别名-->
+        <!-- 监控统计拦截的filters,日志记录,这里开启了stat,wall（sql翻过墙过滤监控）,log4j（log4j的监控）配置 -->
+        <!--<property name="proxyFilters">-->
+            <!--<list>-->
+                <!--<ref bean="statfilter" />-->
+                <!--<ref bean="logFilter" />-->
+            <!--</list>-->
+        <!--</property>-->
+        <property name="filters" value="stat" />
+
     </bean>
+
+    <!-- 慢SQL记录 *start* -->
+    <!--<bean id="statfilter" class="com.alibaba.druid.filter.stat.StatFilter">-->
+        <!--&lt;!&ndash; 开启合并sql &ndash;&gt;-->
+        <!--<property name="mergeSql" value="true" />-->
+        <!--&lt;!&ndash; 开启慢查询语句,1秒 &ndash;&gt;-->
+        <!--<property name="slowSqlMillis" value="1000" />-->
+        <!--<property name="logSlowSql" value="true" />-->
+    <!--</bean>-->
+
+    <!--<bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4jFilter">-->
+        <!-- <property name="resultSetLogEnabled" value="false" /> -->
+        <!-- <property name="statementExecutableSqlLogEnable" value="true" /> -->
+    <!--</bean>-->
+    <!-- 慢SQL记录  *end* -->
+    <!-- ========================================================-->
 
     <!-- ========================================分隔线========================================= -->
 
@@ -58,6 +87,23 @@
         UserMapper.xml位于me.gacl.mapping包下，这样UserMapper.xml就可以被自动扫描
          -->
         <property name="mapperLocations" value="classpath:com/sgdp/sys/*/mapping/*.xml" />
+      <!--<property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <!-- 这里的几个配置主要演示如何使用，如果不理解，一定要去掉下面的配置 -->
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!-- 配置扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
