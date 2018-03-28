@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sgdp.sys.resource.dao.ResourceMapper">
-  <resultMap id="BaseResultMap" type="com.sgdp.sys.resource.model.Resource">
-    <id column="resourceid" jdbcType="VARCHAR" property="resourceid" />
-    <result column="resourcename" jdbcType="VARCHAR" property="resourcename" />
-    <result column="resourcecode" jdbcType="VARCHAR" property="resourcecode" />
-    <result column="resourcepath" jdbcType="VARCHAR" property="resourcepath" />
-    <result column="resourcetype" jdbcType="INTEGER" property="resourcetype" />
-    <result column="resourcesymbol" jdbcType="VARCHAR" property="resourcesymbol" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="parentresourceid" jdbcType="VARCHAR" property="parentresourceid" />
-    <result column="resourceicon" jdbcType="VARCHAR" property="resourceicon" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.sgdp.sys.resource.model.Resource">
+        <id column="resourceid" jdbcType="VARCHAR" property="resourceid"/>
+        <result column="resourcename" jdbcType="VARCHAR" property="resourcename"/>
+        <result column="resourcecode" jdbcType="VARCHAR" property="resourcecode"/>
+        <result column="resourcepath" jdbcType="VARCHAR" property="resourcepath"/>
+        <result column="resourcetype" jdbcType="INTEGER" property="resourcetype"/>
+        <result column="resourcesymbol" jdbcType="VARCHAR" property="resourcesymbol"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="parentresourceid" jdbcType="VARCHAR" property="parentresourceid"/>
+        <result column="resourceicon" jdbcType="VARCHAR" property="resourceicon"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     resourceid, resourcename, resourcecode, resourcepath, resourcetype, resourcesymbol, 
     remark, parentresourceid, resourceicon
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_resource
-    where resourceid = #{resourceid,jdbcType=VARCHAR}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from sys_resource
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_resource
+        where resourceid = #{resourceid,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_resource
+        <choose>
+            <when test="sort != null and order !=null">
+                ORDER by ${sort} ${order}
+            </when>
+            <when test="sort != null">
+                ORDER by ${sort} desc
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_resource
     where resourceid = #{resourceid,jdbcType=VARCHAR}
   </delete>
-  <delete id="batchDelete" parameterType="java.lang.String">
-    delete from sys_resource
-    where resourceid in
-    <foreach item="resourceids" collection="list" open="(" separator="," close=")">
-      #{resourceids}
-    </foreach>
-  </delete>
-  <insert id="insert" parameterType="com.sgdp.sys.resource.model.Resource">
+    <delete id="batchDelete" parameterType="java.lang.String">
+        delete from sys_resource
+        where resourceid in
+        <foreach item="resourceids" collection="list" open="(" separator="," close=")">
+            #{resourceids}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="com.sgdp.sys.resource.model.Resource">
     insert into sys_resource (resourceid, resourcename, resourcecode, 
       resourcepath, resourcetype, resourcesymbol, 
       remark, parentresourceid, resourceicon
@@ -48,98 +58,98 @@
       #{remark,jdbcType=VARCHAR}, #{parentresourceid,jdbcType=VARCHAR}, #{resourceicon,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sgdp.sys.resource.model.Resource">
-    insert into sys_resource
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="resourceid != null">
-        resourceid,
-      </if>
-      <if test="resourcename != null">
-        resourcename,
-      </if>
-      <if test="resourcecode != null">
-        resourcecode,
-      </if>
-      <if test="resourcepath != null">
-        resourcepath,
-      </if>
-      <if test="resourcetype != null">
-        resourcetype,
-      </if>
-      <if test="resourcesymbol != null">
-        resourcesymbol,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="parentresourceid != null">
-        parentresourceid,
-      </if>
-      <if test="resourceicon != null">
-        resourceicon,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="resourceid != null">
-        #{resourceid,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcename != null">
-        #{resourcename,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcecode != null">
-        #{resourcecode,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcepath != null">
-        #{resourcepath,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcetype != null">
-        #{resourcetype,jdbcType=INTEGER},
-      </if>
-      <if test="resourcesymbol != null">
-        #{resourcesymbol,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="parentresourceid != null">
-        #{parentresourceid,jdbcType=VARCHAR},
-      </if>
-      <if test="resourceicon != null">
-        #{resourceicon,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sgdp.sys.resource.model.Resource">
-    update sys_resource
-    <set>
-      <if test="resourcename != null">
-        resourcename = #{resourcename,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcecode != null">
-        resourcecode = #{resourcecode,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcepath != null">
-        resourcepath = #{resourcepath,jdbcType=VARCHAR},
-      </if>
-      <if test="resourcetype != null">
-        resourcetype = #{resourcetype,jdbcType=INTEGER},
-      </if>
-      <if test="resourcesymbol != null">
-        resourcesymbol = #{resourcesymbol,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="parentresourceid != null">
-        parentresourceid = #{parentresourceid,jdbcType=VARCHAR},
-      </if>
-      <if test="resourceicon != null">
-        resourceicon = #{resourceicon,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where resourceid = #{resourceid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.sgdp.sys.resource.model.Resource">
+    <insert id="insertSelective" parameterType="com.sgdp.sys.resource.model.Resource">
+        insert into sys_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceid != null">
+                resourceid,
+            </if>
+            <if test="resourcename != null">
+                resourcename,
+            </if>
+            <if test="resourcecode != null">
+                resourcecode,
+            </if>
+            <if test="resourcepath != null">
+                resourcepath,
+            </if>
+            <if test="resourcetype != null">
+                resourcetype,
+            </if>
+            <if test="resourcesymbol != null">
+                resourcesymbol,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="parentresourceid != null">
+                parentresourceid,
+            </if>
+            <if test="resourceicon != null">
+                resourceicon,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resourceid != null">
+                #{resourceid,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcename != null">
+                #{resourcename,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcecode != null">
+                #{resourcecode,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcepath != null">
+                #{resourcepath,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcetype != null">
+                #{resourcetype,jdbcType=INTEGER},
+            </if>
+            <if test="resourcesymbol != null">
+                #{resourcesymbol,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="parentresourceid != null">
+                #{parentresourceid,jdbcType=VARCHAR},
+            </if>
+            <if test="resourceicon != null">
+                #{resourceicon,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sgdp.sys.resource.model.Resource">
+        update sys_resource
+        <set>
+            <if test="resourcename != null">
+                resourcename = #{resourcename,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcecode != null">
+                resourcecode = #{resourcecode,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcepath != null">
+                resourcepath = #{resourcepath,jdbcType=VARCHAR},
+            </if>
+            <if test="resourcetype != null">
+                resourcetype = #{resourcetype,jdbcType=INTEGER},
+            </if>
+            <if test="resourcesymbol != null">
+                resourcesymbol = #{resourcesymbol,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="parentresourceid != null">
+                parentresourceid = #{parentresourceid,jdbcType=VARCHAR},
+            </if>
+            <if test="resourceicon != null">
+                resourceicon = #{resourceicon,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where resourceid = #{resourceid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sgdp.sys.resource.model.Resource">
     update sys_resource
     set resourcename = #{resourcename,jdbcType=VARCHAR},
       resourcecode = #{resourcecode,jdbcType=VARCHAR},

@@ -29,9 +29,11 @@ public class ResourceController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public Map listResources(int limit, int offset,String sort,String order) {
-
+        Map paramMap = new HashMap();
+        paramMap.put("sort", sort);
+        paramMap.put("order", order);
         PageHelper.startPage(offset, limit);
-        List <Resource> resourceLst = resourceService.selectAll();
+        List <Resource> resourceLst = resourceService.selectAll(paramMap);
         PageInfo pageInfo = new PageInfo(resourceLst);
         Map <String, Object> result = new HashMap <String, Object>();
         result.put("total", pageInfo.getTotal());

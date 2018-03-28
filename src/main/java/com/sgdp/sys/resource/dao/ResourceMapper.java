@@ -3,6 +3,7 @@ package com.sgdp.sys.resource.dao;
 import com.sgdp.sys.resource.model.Resource;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ResourceMapper {
     int deleteByPrimaryKey(String resourceid);
@@ -19,6 +20,6 @@ public interface ResourceMapper {
 
     int updateByPrimaryKey(Resource record);
 
-    List <Resource> selectAll();
+    List <Resource> selectAll(Map paramMap);
 
 }

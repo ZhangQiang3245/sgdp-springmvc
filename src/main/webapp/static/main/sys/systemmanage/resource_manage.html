@@ -17,6 +17,7 @@
     <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
     <link href="../../css/animate.min.css" rel="stylesheet">
     <link href="../../css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="../../css/plugins/treeview/bootstrap-treeview.css" rel="stylesheet">
     <base target="_blank">
 
 </head>
@@ -59,57 +60,70 @@
     </div>
     <!-- End Panel Basic -->
 </div>
-<div id="addForm" class="row col-sm-12" style="display: none" >
-<form class="form-horizontal" id="resourceadd">
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="resourcename">资源名称：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourcename" name="resourcename" class="form-control" placeholder="请输入文本">
+<div id="tree"></div>
+
+
+
+
+<div id="addForm" class="row col-sm-12" style="display: none">
+    <form class="form-horizontal" id="resourceadd">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resourcename">资源名称：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourcename" name="resourcename" class="form-control" placeholder="请输入资源名称">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="resourcepath">资源路径：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourcepath" name="resourcepath" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resourcepath">资源路径：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourcepath" name="resourcepath" class="form-control" placeholder="请输入URI">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="resourcesybol">资源权限：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourcesybol" name="resourcesybol" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resourcesybol">资源权限：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourcesybol" name="resourcesybol" class="form-control" placeholder="请输入资源权限">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="resourcecode">资源编码：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourcecode" name="resourcecode" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="parentresourceid">上级资源：</label>
+            <div class="col-sm-9">
+                <input type="text" id="parentresourceid" name="parentresourceid" class="form-control"
+                       placeholder="请输入上级资源编码">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="resourcetype">资源类型：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourcetype" name="resourcetype" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resourcecode">资源编码：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourcecode" name="resourcecode" class="form-control" placeholder="请输入资源编码">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="resourceicon">资源图标：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourceicon" name="resourceicon" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resourcetype">资源类型：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourcetype" name="resourcetype" class="form-control" placeholder="请输入资源类型">
+            </div>
         </div>
-    </div>
-    <div class="form-group hidden">
-        <label class="col-sm-3 control-label" for="resourceid">资源id：</label>
-        <div class="col-sm-9">
-            <input type="text" id="resourceid" name="resourceid" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="resourceicon">资源图标：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourceicon" name="resourceicon" class="form-control" placeholder="请输入资源图标">
+            </div>
         </div>
-    </div>
-    <div class="form-group hidden">
-        <label class="col-sm-3 control-label" for="parentresourceid">上级资源：</label>
-        <div class="col-sm-9">
-            <input type="text" id="parentresourceid" name="parentresourceid" class="form-control" placeholder="请输入文本">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="remark">资源说明：</label>
+            <div class="col-sm-9">
+                <textarea id="remark" name="remark" class="form-control" placeholder="请输入资源说明"></textarea>
+            </div>
         </div>
-    </div>
-</form>
+        <div class="form-group hidden">
+            <label class="col-sm-3 control-label" for="resourceid">资源id：</label>
+            <div class="col-sm-9">
+                <input type="text" id="resourceid" name="resourceid" class="form-control" placeholder="请输入文本">
+            </div>
+        </div>
+
+    </form>
 </div>
 
 
@@ -119,6 +133,7 @@
 <script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../../js/plugins/treeview/bootstrap-treeview.js"></script>
 <script src="../../js/plugins/layer/layer.js"></script>
 <script src="./js/resource_manage.js"></script>
 </body>

@@ -3,6 +3,7 @@ package com.sgdp.sys.resource.service;
 import com.sgdp.sys.resource.model.Resource;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ZQ on 2018/3/22.
@@ -18,7 +19,7 @@ public interface IResourceService {
 
     Resource selectByPrimaryKey(String resourceid);
 
-    List <Resource> selectAll();
+    List <Resource> selectAll(Map paramMap);
 
     int updateByPrimaryKeySelective(Resource record);
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ZQ on 2018/3/22.
@@ -36,8 +37,8 @@ public class ResourceServiceImpl implements IResourceService {
         return resourceMapper.selectByPrimaryKey(resourceid);
     }
 
-    public List <Resource> selectAll() {
-        return resourceMapper.selectAll();
+    public List <Resource> selectAll(Map paramMap) {
+        return resourceMapper.selectAll(paramMap);
     }
 
     public int updateByPrimaryKeySelective(Resource record) {
